@@ -131,28 +131,6 @@ graph TD
 
 ---
 
-## 💎 Principios SOLID Aplicados
-
-| Principio | Aplicación en TouchShield |
-|---|---|
-| **S** - *Single Responsibility* | Cada clase tiene una única razón de cambio. `OverlayViewFactory` únicamente construye y decora vistas; `ShieldLocalDataSource` solo lee/escribe almacenamiento; `ShieldViewModel` solo coordina el estado de la UI. |
-| **O** - *Open/Closed* | Los eventos de UI están modelados con `sealed interface ShieldUiEvent`. Se pueden agregar nuevos eventos sin alterar los existentes. Las fuentes de datos pueden cambiarse (p. ej., a Room o DataStore) implementando `ShieldRepository` sin tocar los casos de uso. |
-| **L** - *Liskov Substitution* | Cualquier implementación de `ShieldRepository` (como `ShieldRepositoryImpl` o un `FakeShieldRepository` en pruebas) puede sustituir a la interfaz sin romper el comportamiento de los casos de uso ni del ViewModel. |
-| **I** - *Interface Segregation* | Los casos de uso dividen las operaciones en responsabilidades específicas (`ToggleShieldUseCase`, `GetShieldConfigUseCase`) en lugar de depender de interfaces gigantescas. |
-| **D** - *Dependency Inversion* | Los casos de uso y la capa de presentación dependen de la abstracción `ShieldRepository`, no de la clase concreta `ShieldRepositoryImpl` ni de `SharedPreferences`. |
-
----
-
-## 🛠️ Patrones de Diseño Utilizados
-
-1. **Repository Pattern**: Centraliza y desacopla la fuente de datos del resto de la aplicación.
-2. **Factory Pattern (`OverlayViewFactory`)**: Centraliza la instanciación de vistas complejas del `WindowManager`, gestionando parámetros de layout, flags de toque (`FLAG_NOT_FOCUSABLE`, `FLAG_NOT_TOUCH_MODAL`), fondos y listeners.
-3. **Dependency Injection (Manual DI / Service Locator)**: Implementado mediante `AppContainer` y `DefaultAppContainer`, asegurando inyección por constructor limpia sin sobrecarga de librerías externas de generación de código como Kapt o Hilt (crucial para procesadores automotrices de bajo consumo).
-4. **Unidirectional Data Flow (UDF)**: La UI es una función pura del estado emitido por el `ViewModel`. Las acciones del usuario fluyen en un único sentido a través de `ShieldUiEvent`.
-5. **Observer Pattern**: Aprovechado a través de `Kotlin StateFlow`, notificando a los servicios en segundo plano y a la UI cada vez que se modifica la configuración.
-
----
-
 ## ⚡ Tecnologías y Herramientas
 
 - **Lenguaje**: Kotlin 2.0.21
@@ -173,7 +151,7 @@ graph TD
 ### Compilación desde código fuente:
 ```bash
 # Clonar el repositorio
-git clone https://github.com/tu-usuario/TouchShield.git
+git clone https://github.com/albinrk10/ghost-touch-killer
 cd TouchShield
 
 # Compilar APK Debug
