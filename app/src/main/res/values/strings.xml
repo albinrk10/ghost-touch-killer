@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TouchShield</string>
+    <string name="accessibility_service_desc">Protección contra toques fantasma. Cierra automáticamente la barra de notificaciones si se abre accidentalmente.</string>
+</resources>
